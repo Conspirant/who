@@ -15,10 +15,30 @@ const pageOrder: PageType[] = [
   "letter",
 ];
 
+const imageUrls = [
+  "/images/new_1_init.jpeg",
+  "/images/new_2_reject.jpeg",
+  "/images/new_3_goodboy.jpeg",
+  "/images/new_4_ask.jpeg",
+  "/images/new_5_gift.jpg",
+  "/images/new_6_reveal.jpeg",
+];
+
+const preloadImages = () => {
+  imageUrls.forEach((url) => {
+    const img = new Image();
+    img.src = url;
+  });
+};
+
 const Index = () => {
   const [recipientName, setRecipientName] = useState("Krishhh");
   const [currentPageIndex, setCurrentPageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+
+  useEffect(() => {
+    preloadImages();
+  }, []);
 
   const currentPage = pageOrder[currentPageIndex];
 
