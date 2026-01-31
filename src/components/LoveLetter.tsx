@@ -18,8 +18,8 @@ const LoveLetter = ({ recipientName }: LoveLetterProps) => {
  
  Happy Valentine's Day.
  
- Yours,
- 💖`;
+ Truly yours,
+ Thagnya 💖`;
 
   useEffect(() => {
     if (visibleChars < letterContent.length) {
