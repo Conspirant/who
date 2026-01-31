@@ -1,0 +1,430 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Pacifico&family=Caveat:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 350 100% 98%;
+    --foreground: 350 30% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 350 30% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 350 30% 20%;
+
+    --primary: 350 80% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 30 100% 95%;
+    --secondary-foreground: 350 30% 25%;
+
+    --muted: 350 30% 92%;
+    --muted-foreground: 350 15% 45%;
+
+    --accent: 350 90% 75%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 350 30% 88%;
+    --input: 350 30% 88%;
+    --ring: 350 80% 65%;
+
+    --radius: 1rem;
+
+    /* Custom Valentine colors */
+    --rose: 350 80% 65%;
+    --rose-light: 350 100% 92%;
+    --rose-dark: 350 70% 45%;
+    --coral: 15 85% 70%;
+    --cream: 40 100% 97%;
+    --gold: 45 100% 60%;
+    --blush: 350 50% 85%;
+    --paper: 40 30% 96%;
+
+    /* Gradients */
+    --gradient-love: linear-gradient(135deg, hsl(350 80% 65%), hsl(15 85% 70%));
+    --gradient-sunset: linear-gradient(180deg, hsl(350 100% 98%), hsl(350 100% 92%));
+    --gradient-shimmer: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.4), transparent);
+    --gradient-envelope: linear-gradient(180deg, hsl(350 60% 75%), hsl(350 70% 60%));
+  }
+
+  .dark {
+    --background: 350 30% 8%;
+    --foreground: 350 20% 95%;
+
+    --card: 350 30% 12%;
+    --card-foreground: 350 20% 95%;
+
+    --popover: 350 30% 12%;
+    --popover-foreground: 350 20% 95%;
+
+    --primary: 350 80% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 350 30% 18%;
+    --secondary-foreground: 350 20% 90%;
+
+    --muted: 350 30% 18%;
+    --muted-foreground: 350 15% 60%;
+
+    --accent: 350 70% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 350 30% 20%;
+    --input: 350 30% 20%;
+    --ring: 350 80% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn-love {
+    @apply px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold text-lg
+           shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl
+           active:scale-95;
+    background: var(--gradient-love);
+  }
+
+  .btn-love:hover {
+    box-shadow: 0 10px 40px hsl(350 80% 65% / 0.4);
+  }
+
+  .btn-nav {
+    @apply px-6 py-3 rounded-full bg-card text-foreground font-medium
+           shadow-md transition-all duration-300 hover:scale-105 hover:shadow-lg
+           border-2 border-primary/20 hover:border-primary/40;
+  }
+
+  .card-memory {
+    @apply relative w-full aspect-square cursor-pointer;
+    perspective: 1000px;
+  }
+
+  .card-memory-inner {
+    @apply relative w-full h-full transition-transform duration-700;
+    transform-style: preserve-3d;
+  }
+
+  .card-memory.flipped .card-memory-inner {
+    transform: rotateY(180deg);
+  }
+
+  .card-memory-face {
+    @apply absolute w-full h-full rounded-2xl flex items-center justify-center p-4;
+    backface-visibility: hidden;
+  }
+
+  .card-memory-front {
+    @apply bg-gradient-to-br from-primary to-accent text-primary-foreground;
+  }
+
+  .card-memory-back {
+    @apply bg-card border-2 border-primary/20 overflow-hidden;
+    transform: rotateY(180deg);
+  }
+
+  .text-gradient {
+    background: var(--gradient-love);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-shimmer);
+    animation: shimmer 2s infinite;
+  }
+
+  .font-handwriting {
+    font-family: 'Caveat', cursive;
+  }
+
+  .paper-texture {
+    background-color: hsl(var(--paper));
+    background-image: 
+      linear-gradient(90deg, transparent 79px, hsl(350 80% 65% / 0.1) 79px, hsl(350 80% 65% / 0.1) 81px, transparent 81px),
+      linear-gradient(hsl(350 80% 65% / 0.05) 1px, transparent 1px);
+    background-size: 100% 32px;
+  }
+
+  .envelope {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1.5;
+    cursor: pointer;
+  }
+
+  .envelope-body {
+    @apply absolute inset-0 rounded-lg shadow-love-lg overflow-hidden;
+    background: var(--gradient-envelope);
+  }
+
+  .envelope-flap {
+    @apply absolute top-0 left-0 right-0;
+    height: 50%;
+    background: linear-gradient(180deg, hsl(350 50% 70%), hsl(350 60% 65%));
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    transform-origin: top center;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+  }
+
+  .envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+  }
+
+  .envelope-letter {
+    @apply absolute left-1/2 -translate-x-1/2 w-[90%] bg-card rounded-lg shadow-lg;
+    bottom: 10%;
+    height: 0;
+    transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, 
+                bottom 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+    overflow: hidden;
+  }
+
+  .envelope.open .envelope-letter {
+    height: 120%;
+    bottom: 60%;
+  }
+
+  .page-container {
+    @apply min-h-screen w-full flex flex-col items-center justify-center px-4 py-8;
+  }
+
+  .page-transition {
+    @apply transition-all duration-700 ease-out;
+  }
+
+  .page-enter {
+    @apply opacity-0 translate-y-8;
+  }
+
+  .page-enter-active {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .page-exit {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .page-exit-active {
+    @apply opacity-0 -translate-y-8;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out infinite 2s;
+  }
+
+  .animate-wiggle {
+    animation: wiggle 0.5s ease-in-out;
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  .animate-heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+
+  .animate-confetti {
+    animation: confetti 1s ease-out forwards;
+  }
+
+  .animate-rain {
+    animation: rain 3s linear infinite;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+
+  .animate-bounce-soft {
+    animation: bounce-soft 2s ease-in-out infinite;
+  }
+
+  .animate-spin-slow {
+    animation: spin 8s linear infinite;
+  }
+
+  .animate-write {
+    animation: write 3s ease-out forwards;
+  }
+
+  .animate-letter-reveal {
+    animation: letter-reveal 0.05s ease-out forwards;
+  }
+
+  .hover-wiggle:hover {
+    animation: wiggle 0.4s ease-in-out;
+  }
+
+  .line-clamp-write {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+  75% { transform: rotate(-3deg); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+  20%, 40%, 60%, 80% { transform: translateX(10px); }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.1); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.1); }
+  70% { transform: scale(1); }
+}
+
+@keyframes confetti {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+@keyframes rain {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes write {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes letter-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-up {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
